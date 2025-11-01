@@ -8,25 +8,21 @@ package ca.bcit.comp2522.bookstore;
  */
 public final class Name implements Printable
 {
-    // Constants
-    private static final int MIN_NAME_LENGTH_CHARS = 1;
     private static final int MAX_NAME_LENGTH_CHARS = 49;
 
-    // Instance variables
     private final String firstName;
     private final String lastName;
 
-    // Constructor
     private Name(final String firstName, final String lastName)
     {
         if (firstName == null || firstName.isBlank())
         {
-            throw new IllegalArgumentException("firstName cannot be null or blank.");
+            throw new IllegalArgumentException("First Name cannot be null or blank.");
         }
 
         if (lastName == null || lastName.isBlank())
         {
-            throw new IllegalArgumentException("firstName cannot be null or blank.");
+            throw new IllegalArgumentException("Last Name cannot be null or blank.");
         }
 
         if (firstName.length() > MAX_NAME_LENGTH_CHARS || lastName.length() > MAX_NAME_LENGTH_CHARS)
@@ -38,11 +34,19 @@ public final class Name implements Printable
         this.lastName = lastName;
     }
 
-    public void display()
+    /**
+     * Returns the full name in "First Last" format.
+     *
+     * @return the full name
+     */
+    public String getFullName()
     {
-
+        return firstName + " " + lastName;
     }
 
-
-
+    @Override
+    public void display()
+    {
+        System.out.println("Full Name: " + getFullName());
+    }
 }
