@@ -13,25 +13,30 @@ public final class Name implements Printable
     private final String firstName;
     private final String lastName;
 
-    private Name(final String firstName, final String lastName)
+
+
+    public Name(final String firstName,
+                 final String lastName)
     {
-        if (firstName == null || firstName.isBlank())
+       validateName(firstName, "firstName");
+       validateName(lastName, "lastName");
+
+       this.firstName = firstName;
+       this.lastName = lastName;
+    }
+
+    protected void validateName(final String name,
+                                final String fieldType)
+    {
+        if (name == null || name.isBlank())
         {
-            throw new IllegalArgumentException("First Name cannot be null or blank.");
+            throw new IllegalArgumentException(fieldType + " cannot be null or blank.");
         }
 
-        if (lastName == null || lastName.isBlank())
+        if (name.length() > MAX_NAME_LENGTH_CHARS)
         {
-            throw new IllegalArgumentException("Last Name cannot be null or blank.");
+            throw new IllegalArgumentException(fieldType + " must be less than " + MAX_NAME_LENGTH_CHARS + " characters.");
         }
-
-        if (firstName.length() > MAX_NAME_LENGTH_CHARS || lastName.length() > MAX_NAME_LENGTH_CHARS)
-        {
-            throw new IllegalArgumentException("Names must be less than " + MAX_NAME_LENGTH_CHARS + " characters.");
-        }
-
-        this.firstName = firstName;
-        this.lastName = lastName;
     }
 
     /**
@@ -39,9 +44,15 @@ public final class Name implements Printable
      *
      * @return the full name
      */
-    public String getFullName()
+    protected String getFullName()
     {
         return firstName + " " + lastName;
+    }
+
+    @Override
+    public String toString()
+    {
+        return getFullName();
     }
 
     @Override
