@@ -39,25 +39,27 @@ public class Person implements Comparable<Person>,
     @Override
     public void display()
     {
-        System.out.println("Name: " + this.name);
-        System.out.println("Date of Birth: " + this.dateOfBirth);
-        System.out.println("Date of Death: " + this.dateOfDeath);
+        System.out.println(
+            "Name: " + this.name +
+            "\nDate of Birth: " + this.dateOfBirth +
+            "\nDate of Death: " + this.dateOfDeath);
     }
 
     @Override
     public void backward()
     {
+        StringBuilder str;
+        str = new StringBuilder();
 
+        str.append(this.name);
+        str.reverse();
 
+        System.out.println(str.toString());
     }
 
     @Override
     public int compareTo(Person that)
     {
-        if (dateOfBirth.getYear() != that.dateOfBirth.getYear())
-        {
-            return that.dateOfBirth.getYear() - dateOfBirth.getYear();
-        }
-
+        return that.dateOfBirth.getYear() - this.dateOfBirth.getYear();
     }
 }

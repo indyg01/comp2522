@@ -6,14 +6,13 @@ package ca.bcit.comp2522.bookstore;
  * @author Indy Grewal
  * @version 1.0
  */
-public final class Name implements Printable
+public final class Name
+    implements Printable
 {
     private static final int MAX_NAME_LENGTH_CHARS = 49;
 
     private final String firstName;
     private final String lastName;
-
-
 
     public Name(final String firstName,
                  final String lastName)
@@ -25,8 +24,8 @@ public final class Name implements Printable
        this.lastName = lastName;
     }
 
-    protected void validateName(final String name,
-                                final String fieldType)
+    private void validateName(final String name,
+                              final String fieldType)
     {
         if (name == null || name.isBlank())
         {
@@ -39,25 +38,9 @@ public final class Name implements Printable
         }
     }
 
-    /**
-     * Returns the full name in "First Last" format.
-     *
-     * @return the full name
-     */
-    protected String getFullName()
-    {
-        return firstName + " " + lastName;
-    }
-
-    @Override
-    public String toString()
-    {
-        return getFullName();
-    }
-
     @Override
     public void display()
     {
-        System.out.println("Full Name: " + getFullName());
+        System.out.println("Full Name: " + this.firstName + " " + this.lastName);
     }
 }

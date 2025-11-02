@@ -3,63 +3,96 @@ package ca.bcit.comp2522.bookstore;
 /**
  * Represents a book with a title, publication year, and author.
  * Implements Comparable, Printable, and Reversible interfaces.
- *
+ * <p>
  * Older books are considered "larger" when compared.
  *
  * @author Indy
  * @version 1.0
  */
 public class Book
-        implements Comparable<Book>,
-        Printable,
-        Reversible
+    implements Comparable<Book>,
+               Printable,
+               Reversible
 {
-    private static final int MAX_TITLE_LENGTH_CHARS = 100;
-    private static final int MIN_YEAR = 1;
-    private static final int CURRENT_YEAR = ;
+    private static final int MAX_TITLE_LENGTH_CHARS = 99;
+    private static final int MIN_YEAR               = 1;
+    private static final int CURRENT_YEAR           = 2025;
 
     private final String title;
-    private final int yearPublished;
-    private final String author;
+    private final int    yearPublished;
+    private final Author author;
 
-    public Book(String title, int yearPublished, String author)
+    public Book(final String title,
+                final int yearPublished,
+                final Author author)
     {
-        this.title = title;
+        validateTitle(title, "title");
+        validateYearPublished(yearPublished, "yearPublished");
+        validateAuthor(author, "author");
+
+        this.title         = title;
         this.yearPublished = yearPublished;
-        this.author = author;
+        this.author        = author;
     }
 
-    public int getYearPublished()
+    private void validateTitle(final String title,
+                               final String fieldType)
     {
-        return this.yearPublished;
+        if (title == null || title.isBlank())
+        {
+            throw new IllegalArgumentException(fieldType + " cannot be blank or null.");
+        }
+
+        if (title.length() > MAX_TITLE_LENGTH_CHARS)
+        {
+            throw new IllegalArgumentException(fieldType + " cannot be longer than " + MAX_TITLE_LENGTH_CHARS + ".");
+        }
     }
 
-    public String getAuthor()
+    private void validateYearPublished(final int yearPublished,
+                                       final String fieldType)
     {
-        return this.author;
+        if (yearPublished < MIN_YEAR || yearPublished > CURRENT_YEAR)
+        {
+            throw new IllegalArgumentException(fieldType + " is not within " + MIN_YEAR + " and " + CURRENT_YEAR + ".");
+        }
     }
 
-    public String getTitle()
+    private void validateAuthor(final Author author,
+                                final String fieldType)
     {
-        return this.title;
+        if (author == null)
+        {
+            throw new IllegalArgumentException(fieldType + " cannot be null.");
+        }
     }
 
-    @override
+    @Override
     public int compareTo(Book that)
     {
-        return that.getYearPublished() - this.getYearPublished();
+        return that.yearPublished - this.yearPublished;
     }
 
+    @Override
     public void display()
     {
-        System.out.println("Title: " + this.getTitle() + " Year Published: " + this.getYearPublished() + " Author: " + this.getAuthor());
+        System.out.println(
+            "Title: " + this.title +
+            "\nYear Published: " + this.yearPublished +
+            "\nAuthor: " + this.author.toString());
     }
 
+    @Override
     public void backward()
     {
-        String reversedTitle;
-        reversedTitle = new StringBuilder(this.getTitle()).reverse().toString();
-        System.out.println("Backwards: " + reversedTitle);
-    }
-}
+        StringBuilder str;
+        str = new StringBuilder();
 
+        str.append(this.title);
+        str.reverse();
+
+        System.out.println(str.toString());
+    }
+
+    public abstract boolean equals(Biography that);
+}
