@@ -51,7 +51,7 @@ public class Main
         final Autobiography auto5;
 
 
-        System.out.println("=== BOOKSTORE SYSTEM ===\n");
+        System.out.println("--- BOOKSTORE SYSTEM ---\n");
 
 
         orwell = new Author(new Name("George", "Orwell"),
@@ -164,19 +164,17 @@ public class Main
         auto4 = new Autobiography("I Know Why the Caged Bird Sings", 1969, angelou);
         auto5 = new Autobiography("The Autobiography of Malcolm X", 1965, malcolm);
 
-        // ----------------------------
-        // Printing & Comparisons
-        // ----------------------------
-        System.out.println("=== PRINTABLE OUTPUTS ===");
+
+        System.out.println("--- PRINTABLE OUTPUTS ---");
         book1.display();
         bio1.display();
         auto1.display();
 
-        System.out.println("\n=== REVERSIBLE OUTPUTS ===");
+        System.out.println("\n--- REVERSIBLE OUTPUTS ---");
         book1.backward();
         mandela.backward();
 
-        System.out.println("\n=== COMPARISONS ===");
+        System.out.println("\n--- COMPARISONS ---");
         System.out.println("Compare Books by Year (1984 vs. Mockingbird): "
                            + book1.compareTo(book2));
         System.out.println("Compare Authors by Birth Year (Orwell vs. Lee): "
@@ -184,6 +182,6 @@ public class Main
         System.out.println("Compare Biographies by Subject (bio1 vs. bio2): "
                            + bio1.equals(bio2));
 
-        System.out.println("\n=== PROGRAM END ===");
+        System.out.println("\n--- PROGRAM END ---");
     }
 }
